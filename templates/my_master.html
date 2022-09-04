@@ -1,0 +1,25 @@
+{% extends 'admin/base.html' %}
+{% block styles %}
+{{super()}}
+<!-- CSS only -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block access_control %}
+{% if current_user.is_authenticated %}
+<div class="navbar-text btn-group pull-right">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        <i class="glyphicon glyphicon-user"></i>
+        {% if current_user.first_name -%}
+        {{ current_user.first_name }}
+        {% else -%}
+        {{ current_user.email }}
+        {%- endif %}<span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
